@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+
+int main() {
+    int userChoice, computerChoice;
+    int userScore = 0, computerScore = 0;
+    char userChoiceStr[10];
+    srand(time(0));  // seed the random number generator
+    while (1) {
+        // prompt the user to enter their choice
+        printf("Enter your choice (rock = 0, paper = 1, scissors = 2, exit = -1): ");
+        scanf("%d%*c", &userChoice);
+        if (userChoice == -1) {
+            break;
+        }
+        // check if the user entered a valid choice
+        if (userChoice < 0 || userChoice > 2) {
+            printf("Invalid choice. Please enter a valid choice.\n");
+            continue;
+        }
+        // generate a random choice for the computer
+        computerChoice = rand() % 3;
+        switch (userChoice) {
+            case 0:
+                strcpy(userChoiceStr, "rock");
+                break;
+            case 1:
+                strcpy(userChoiceStr, "paper");
+                break;
+            case 2:
+                strcpy(userChoiceStr, "scissors");
+                break;
+        }
+        switch (computerChoice) {
+            case 0:
+                printf("Computer chose rock\n");
+                if (userChoice == 0) {
+                    printf("Tie!\n");
+                } 
+                
+                else if (userChoice == 1) {
+                    printf("You win!\n");
+                    userScore++;
+                } 
+                
+                else {
+                    printf("You lose!\n");
+                    computerScore++;
+                }
+                break;
+            case 1:
+                printf("Computer chose paper\n");
+                if (userChoice == 0) {
+                printf("You lose!\n");
+                computerScore++;
+                } 
+                else if (userChoice == 1) {
+                printf("Tie!\n");
+                } 
+                else {
+                    printf("You win!\n");
+                    userScore++;
+                }
+            break;
+            case 2:
+                printf("Computer chose scissors\n");
+                if (userChoice == 0) {
+                printf("You win!\n");
+                userScore++;
+                } 
+                else if (userChoice == 1) {
+                printf("You lose!\n");
+                computerScore++;
+                }
+                else {
+                    printf("Tie!\n");
+                }
+            break;
+        }
+        printf("Your score: %d, Computer score: %d\n", userScore, computerScore);
+    }
+return 0;
+}
